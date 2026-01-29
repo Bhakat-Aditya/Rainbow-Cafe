@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react"; // If you have this, otherwise use useEffect
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Coffee } from "lucide-react";
 import { MENU_CATEGORIES } from "../data/config";
@@ -8,22 +9,37 @@ import { MENU_CATEGORIES } from "../data/config";
 gsap.registerPlugin(ScrollTrigger);
 
 const HomeMenu = () => {
-  useEffect(() => {
-    gsap.from(".menu-card-anim", {
-      scrollTrigger: {
-        trigger: "#home-menu",
-        start: "top 80%",
-      },
-      y: 100,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power3.out",
-    });
+  const container = useRef(null);
+
+  // useGSAP handles React Strict Mode automatically (Safe!)
+  // If you get an error "useGSAP is not defined", switch to useEffect code below
+  React.useEffect(() => {
+    const ctx = gsap.context(() => {
+      // The Animation
+      gsap.fromTo(
+        ".menu-card-anim",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: container.current,
+            start: "top 75%", // Triggers when top of section hits 75% of viewport
+            toggleActions: "play none none reverse", // Replays if you scroll back up
+          },
+        },
+      );
+    }, container); // Scope animations to this component
+
+    return () => ctx.revert(); // CLEANUP: This fixes the "Disappearing" bug
   }, []);
 
   return (
     <section
+      ref={container}
       id="home-menu"
       className="py-20 bg-[#0f0f0f] text-white px-4 md:px-12"
     >
@@ -31,6 +47,8 @@ const HomeMenu = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8">
           <div className="menu-card-anim">
+            {" "}
+            {/* REMOVED 'opacity-0' class */}
             <span className="text-orange-500 font-bold tracking-widest text-sm uppercase">
               Our Selection
             </span>
@@ -57,24 +75,30 @@ const HomeMenu = () => {
             <Link
               to="/menu"
               key={cat.id}
-              // Changed bg-[#1a1a1a] to bg-[#2a2a2a] for a lighter base
-              className="menu-card-anim group relative h-[400px] overflow-hidden rounded-2xl bg-[#2a2a2a] border border-white/10 hover:border-orange-500/50 transition-all duration-500"
+              className="menu-card-anim group relative h-[400px] overflow-hidden rounded-2xl bg-[#222] border border-white/10 hover:border-orange-500/50 transition-all duration-500 block"
             >
-              {/* 1. LIGHTER GRADIENT: Only dark at the very bottom for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
+              {/* IMAGE LAYER */}
+              <div
+                className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{
+                  // DYNAMIC IMAGE: Uses the specific image from config.js
+                  backgroundImage: `url('${cat.image}')`,
+                  opacity: 1,
+                }}
+              />
 
-              {/* 2. BRIGHTER IMAGE: Changed opacity-60 to opacity-90 */}
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" />
+              {/* GRADIENT LAYER (Subtle) */}
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
+              {/* TEXT LAYER */}
               <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
                 <Coffee className="w-8 h-8 text-orange-500 mb-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
 
-                {/* Text Shadow added to ensure text pops even on bright images */}
                 <h3 className="text-4xl font-['Oswald'] font-bold uppercase mb-2 group-hover:text-orange-400 transition-colors drop-shadow-lg">
                   {cat.title}
                 </h3>
 
-                <p className="text-gray-200 text-sm line-clamp-2 transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300 drop-shadow-md">
+                <p className="text-gray-200 text-sm line-clamp-2 transform translate-y-0 group-hover:-translate-y-2 transition-transform duration-300 drop-shadow-md font-medium">
                   Click to explore our {cat.items.length} premium{" "}
                   {cat.title.toLowerCase()} blends.
                 </p>

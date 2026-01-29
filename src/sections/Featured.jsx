@@ -13,7 +13,7 @@ const FEATURED_ITEMS = [
     price: "₹50",
     tag: "CROWD FAVORITE",
     desc: "Crunchy Oreo bits blended with vanilla. The undisputed king of cold coffee.",
-    image: "https://images.unsplash.com/photo-1572490122447-e139c1f09e91?q=80&w=1888&auto=format&fit=crop", // Dark Oreo/Choco vibe
+    image: "https://images.pexels.com/photos/28525199/pexels-photo-28525199.jpeg", // Dark Oreo/Choco vibe
     color: "from-blue-900 to-black"
   },
   {
