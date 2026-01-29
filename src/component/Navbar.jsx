@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-scroll";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom"; // Use Router for page switching
+import { Link as ScrollLink } from "react-scroll"; // Use Scroll for same-page jumps
 import { Coffee, Menu, X, Lock } from "lucide-react";
 
 const Navbar = ({ toggleAdmin }) => {
@@ -7,25 +8,39 @@ const Navbar = ({ toggleAdmin }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
 
+  const location = useLocation(); // To know which page we are on
+  const navigate = useNavigate(); // To change pages manually
+
+  // Helper: Handle Navigation Logic
+  const handleNavClick = (sectionId) => {
+    setMobileMenuOpen(false);
+
+    // If we are NOT on the menu page, go there first
+    if (location.pathname !== "/menu") {
+      navigate("/menu");
+      // Wait a bit for page to load, then scroll (optional, but smoother)
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
+
   useEffect(() => {
-    // 1. Scroll Effect Logic
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
 
-    // 2. SECRET KEY LOGIC
-    // The button only appears if URL is website.com/?mode=owner
+    // Check for owner mode
     const queryParams = new URLSearchParams(window.location.search);
-    if (queryParams.get("mode") === "owner") {
-      setIsOwner(true);
-    }
+    if (queryParams.get("mode") === "owner") setIsOwner(true);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: "HOT COFFEE", to: "hot-coffee" },
-    { name: "COLD COFFEE", to: "cold-coffee" },
-    { name: "MOCKTAILS", to: "mocktails" },
+    { name: "HOT COFFEE", id: "hot-coffee" },
+    { name: "COLD COFFEE", id: "cold-coffee" },
+    { name: "MOCKTAILS", id: "mocktails" },
   ];
 
   return (
@@ -34,38 +49,49 @@ const Navbar = ({ toggleAdmin }) => {
         className={`fixed z-50 transition-all duration-500 ease-in-out left-0 right-0
         ${
           isScrolled
-            ? "top-4 mx-auto w-[90%] md:w-[600px] rounded-full bg-black/80 backdrop-blur-md border border-white/10 shadow-2xl py-3 px-6"
+            ? "top-4 mx-auto w-[90%] md:w-[600px] rounded-full bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-3 px-6"
             : "top-0 w-full bg-transparent py-6 px-4 md:px-12"
         }`}
       >
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer">
+          {/* Logo - Always goes to Home */}
+          <RouterLink to="/" className="flex items-center gap-2 cursor-pointer">
             <Coffee className="w-5 h-5 text-orange-500" />
             <span className="font-['Oswald'] font-bold text-xl text-white tracking-widest">
               RAINBOW
             </span>
-          </div>
+          </RouterLink>
 
-          {/* Desktop Links (Hidden on Mobile) */}
+          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.id}
-                smooth={true}
-                className="text-xs font-bold text-gray-300 hover:text-orange-500 cursor-pointer tracking-wider transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              location.pathname === "/menu" ? (
+                // If on Menu Page: SCROLL to section
+                <ScrollLink
+                  key={link.name}
+                  to={link.id}
+                  smooth={true}
+                  offset={-100} // Adjust for navbar height
+                  className="text-xs font-bold text-gray-300 hover:text-orange-500 cursor-pointer tracking-wider transition-colors"
+                >
+                  {link.name}
+                </ScrollLink>
+              ) : (
+                // If on Home Page: ROUTE to Menu Page
+                <RouterLink
+                  key={link.name}
+                  to="/menu"
+                  className="text-xs font-bold text-gray-300 hover:text-orange-500 cursor-pointer tracking-wider transition-colors"
+                >
+                  {link.name}
+                </RouterLink>
+              ),
+            )}
 
-            {/* THE SECRET BUTTON (Only visible to you) */}
             {isOwner && (
               <button
                 onClick={toggleAdmin}
-                className="p-2 bg-red-600/20 text-red-500 rounded-full hover:bg-red-600 hover:text-white transition-all"
-                title="Owner Dashboard"
+                className="p-2 text-red-500 hover:bg-red-900/20 rounded-full"
               >
                 <Lock size={14} />
               </button>
@@ -93,29 +119,22 @@ const Navbar = ({ toggleAdmin }) => {
           </button>
 
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.name}
-              to={link.id}
-              smooth={true}
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-3xl font-['Oswald'] text-white hover:text-orange-500"
+              onClick={() => handleNavClick(link.id)}
+              className="text-3xl font-['Oswald'] text-white hover:text-orange-500 uppercase"
             >
               {link.name}
-            </Link>
+            </button>
           ))}
 
-          {/* Secret Button for Mobile */}
-          {isOwner && (
-            <button
-              onClick={() => {
-                toggleAdmin();
-                setMobileMenuOpen(false);
-              }}
-              className="mt-8 flex items-center gap-2 text-red-500 border border-red-500/30 px-6 py-2 rounded-full"
-            >
-              <Lock size={16} /> OWNER PANEL
-            </button>
-          )}
+          <RouterLink
+            to="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className="mt-8 text-sm text-gray-500 border-b border-gray-700 pb-1"
+          >
+            BACK TO HOME
+          </RouterLink>
         </div>
       )}
     </>

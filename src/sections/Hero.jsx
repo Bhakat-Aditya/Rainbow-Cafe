@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SITE_CONFIG } from "../data/config";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,9 +96,12 @@ const Hero = () => {
 
         {/* Action Buttons */}
         <div className="hero-sub flex gap-4">
-          <button className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-orange-500 hover:text-white transition-all transform hover:scale-105 shadow-lg shadow-orange-500/20">
+          <Link
+            to="/menu"
+            className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-orange-500 hover:text-white transition-all transform hover:scale-105 shadow-lg shadow-orange-500/20 inline-block"
+          >
             VIEW MENU
-          </button>
+          </Link>
           <a
             href={`tel:${SITE_CONFIG.contact.phone.replace(/\s/g, "")}`}
             className="px-8 py-3 border border-white/30 text-white font-bold rounded-full hover:bg-white/10 backdrop-blur-sm transition-all"

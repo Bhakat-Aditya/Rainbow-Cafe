@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./component/Navbar";
+import Navbar from "./component/Navbar"; // NOTE: Check your folder name "component" vs "components"
 import Hero from "./sections/Hero";
 import HomeMenu from "./sections/HomeMenu";
+import Featured from "./sections/Featured"; // <--- NEW
+import Footer from "./sections/Footer"; // <--- NEW
 import MenuPage from "./pages/MenuPage";
-
-const AdminDashboard = () => (
-  <div className="p-20 text-white">Admin Panel (Restricted)</div>
-);
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
@@ -15,10 +13,9 @@ function App() {
   return (
     <Router>
       <div className="bg-black min-h-screen text-white font-sans selection:bg-orange-500 selection:text-white">
-        {/* Navbar stays on all pages */}
         <Navbar toggleAdmin={() => setShowAdmin(!showAdmin)} />
 
-        {/* Admin Modal Overlay */}
+        {/* Admin Modal (Hidden) */}
         {showAdmin && (
           <div className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center">
             <div className="bg-[#1a1a1a] p-8 rounded-2xl w-full max-w-2xl relative border border-white/10">
@@ -36,7 +33,6 @@ function App() {
           </div>
         )}
 
-        {/* Page Routing */}
         <Routes>
           <Route
             path="/"
@@ -44,13 +40,22 @@ function App() {
               <>
                 <Hero />
                 <HomeMenu />
-                {/* Add Footer Here later */}
+                <Featured /> {/* <--- Added Here */}
+                <Footer /> {/* <--- Added Here */}
               </>
             }
           />
-          <Route path="/menu" element={<MenuPage />} />
 
-          {/* Fallback for 404 */}
+          <Route
+            path="/menu"
+            element={
+              <>
+                <MenuPage />
+                <Footer /> {/* Footer on menu page too */}
+              </>
+            }
+          />
+
           <Route
             path="*"
             element={
