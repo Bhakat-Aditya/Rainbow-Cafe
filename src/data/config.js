@@ -192,5 +192,22 @@ export const MENU_CATEGORIES = [
                 available: true
             }
         ]
+    },
+    {
+        id: "seasonal",
+        title: "SEASONAL MOOD",
+        image: "https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=1974&auto=format&fit=crop",
+        items: [
+            {
+                id: 401,
+                name: "Mango Mood",
+                price: "₹30",
+                desc: "Fresh seasonal mango blast.",
+                ingredients: "Fresh Alphonso Mango Pulp, Chilled Milk, Honey",
+                tags: ["Fresh", "Seasonal"],
+                image: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?q=80&w=1773&auto=format&fit=crop",
+                available: true
+            }
+        ]
     }
 ];

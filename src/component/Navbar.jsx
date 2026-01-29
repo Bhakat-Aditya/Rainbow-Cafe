@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom"; // Use Router for page switching
-import { Link as ScrollLink } from "react-scroll"; // Use Scroll for same-page jumps
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 import { Coffee, Menu, X, Lock } from "lucide-react";
 
 const Navbar = ({ toggleAdmin }) => {
@@ -8,21 +8,23 @@ const Navbar = ({ toggleAdmin }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
 
-  const location = useLocation(); // To know which page we are on
-  const navigate = useNavigate(); // To change pages manually
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Helper: Handle Navigation Logic
+  // Updated Links to include Seasonal
+  const navLinks = [
+    { name: "HOT COFFEE", id: "hot-coffee" },
+    { name: "COLD COFFEE", id: "cold-coffee" },
+    { name: "MOCKTAILS", id: "mocktails" },
+    { name: "SEASONAL", id: "seasonal" },
+  ];
+
+  // Helper to handle both scrolling and cross-page navigation
   const handleNavClick = (sectionId) => {
     setMobileMenuOpen(false);
-
-    // If we are NOT on the menu page, go there first
     if (location.pathname !== "/menu") {
-      navigate("/menu");
-      // Wait a bit for page to load, then scroll (optional, but smoother)
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }, 100);
+      // Navigate to the menu page with the specific hash
+      navigate(`/menu#${sectionId}`);
     }
   };
 
@@ -30,18 +32,11 @@ const Navbar = ({ toggleAdmin }) => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
 
-    // Check for owner mode
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.get("mode") === "owner") setIsOwner(true);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: "HOT COFFEE", id: "hot-coffee" },
-    { name: "COLD COFFEE", id: "cold-coffee" },
-    { name: "MOCKTAILS", id: "mocktails" },
-  ];
 
   return (
     <>
@@ -54,33 +49,30 @@ const Navbar = ({ toggleAdmin }) => {
         }`}
       >
         <div className="flex items-center justify-between">
-          {/* Logo - Always goes to Home */}
-          <RouterLink to="/" className="flex items-center gap-2 cursor-pointer">
+          <div className="flex items-center gap-2">
             <Coffee className="w-5 h-5 text-orange-500" />
             <span className="font-['Oswald'] font-bold text-xl text-white tracking-widest">
               RAINBOW
             </span>
-          </RouterLink>
+          </div>
 
-          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) =>
               location.pathname === "/menu" ? (
-                // If on Menu Page: SCROLL to section
                 <ScrollLink
                   key={link.name}
                   to={link.id}
                   smooth={true}
-                  offset={-100} // Adjust for navbar height
+                  offset={-100}
+                  duration={800}
                   className="text-xs font-bold text-gray-300 hover:text-orange-500 cursor-pointer tracking-wider transition-colors"
                 >
                   {link.name}
                 </ScrollLink>
               ) : (
-                // If on Home Page: ROUTE to Menu Page
                 <RouterLink
                   key={link.name}
-                  to="/menu"
+                  to={`/menu#${link.id}`}
                   className="text-xs font-bold text-gray-300 hover:text-orange-500 cursor-pointer tracking-wider transition-colors"
                 >
                   {link.name}
@@ -98,7 +90,6 @@ const Navbar = ({ toggleAdmin }) => {
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button
             className="md:hidden text-white"
             onClick={() => setMobileMenuOpen(true)}
@@ -108,7 +99,6 @@ const Navbar = ({ toggleAdmin }) => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-[60] bg-black flex flex-col items-center justify-center gap-8">
           <button

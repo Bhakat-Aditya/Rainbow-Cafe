@@ -1,14 +1,27 @@
-// src/pages/MenuPage.jsx
-
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft, Coffee, Info, Tag } from "lucide-react";
 import { gsap } from "gsap";
 import { MENU_CATEGORIES } from "../data/config";
 
 const MenuPage = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // 1. Check for Hash and Scroll
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500); // 500ms delay to allow page load and initial GSAP to run
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    // 2. Page Animations
     const tl = gsap.timeline();
     tl.fromTo(
       ".page-title",
@@ -19,7 +32,7 @@ const MenuPage = () => {
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
     );
-  }, []);
+  }, [location]); // Re-run if location changes (e.g., clicking a new nav link while on this page)
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white pt-24 pb-20 px-4 md:px-12">
@@ -37,7 +50,7 @@ const MenuPage = () => {
 
       <div className="max-w-5xl mx-auto space-y-20">
         {MENU_CATEGORIES.map((cat, index) => (
-          <div key={cat.id} id={cat.id} className="menu-group">
+          <div key={cat.id} id={cat.id} className="menu-group scroll-mt-32">
             <h2 className="text-4xl font-['Oswald'] text-orange-500 border-b border-orange-500/20 pb-4 mb-10 flex items-center gap-4">
               <span className="opacity-30">0{index + 1}</span> {cat.title}
             </h2>
@@ -48,7 +61,6 @@ const MenuPage = () => {
                   key={item.id}
                   className="group flex flex-col md:flex-row gap-6 bg-[#141414] p-6 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all duration-500"
                 >
-                  {/* Item Image */}
                   <div className="w-full md:w-32 h-32 flex-shrink-0 overflow-hidden rounded-xl">
                     <img
                       src={item.image}
@@ -57,7 +69,6 @@ const MenuPage = () => {
                     />
                   </div>
 
-                  {/* Item Details */}
                   <div className="flex-grow">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-2xl font-bold font-['Oswald'] tracking-wide group-hover:text-orange-400 transition-colors uppercase">
