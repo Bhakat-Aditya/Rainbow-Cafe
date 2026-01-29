@@ -45,15 +45,13 @@ const HomeMenu = () => {
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-8">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 border-b border-white/10 pb-8 text-center md:text-left">
           <div className="menu-card-anim">
-            {" "}
-            {/* REMOVED 'opacity-0' class */}
             <span className="text-orange-500 font-bold tracking-widest text-sm uppercase">
               Our Selection
             </span>
             <h2 className="text-5xl md:text-7xl font-['Oswald'] font-bold mt-2">
-              CRAFTED <br />{" "}
+              CRAFTED <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">
                 FOR TASTE
               </span>
@@ -62,9 +60,9 @@ const HomeMenu = () => {
 
           <Link
             to="/menu"
-            className="menu-card-anim group flex items-center gap-2 mt-6 md:mt-0 text-lg font-bold hover:text-orange-500 transition-colors"
+            className="menu-card-anim group flex items-center gap-2 mt-8 md:mt-0 text-lg font-bold hover:text-orange-500 transition-colors"
           >
-            VIEW FULL MENU{" "}
+            VIEW FULL MENU
             <ArrowRight className="group-hover:translate-x-2 transition-transform" />
           </Link>
         </div>
