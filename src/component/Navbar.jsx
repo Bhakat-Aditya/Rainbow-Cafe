@@ -41,12 +41,12 @@ const Navbar = ({ toggleAdmin }) => {
   return (
     <>
       <nav
-        className={`fixed z-50 transition-all duration-500 ease-in-out left-0 right-0
-        ${
-          isScrolled
-            ? "top-4 mx-auto w-[90%] md:w-[600px] rounded-full bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-3 px-6"
-            : "top-0 w-full bg-transparent py-6 px-4 md:px-12"
-        }`}
+        className={`fixed z-50 transition-all duration-500 ease-in-out left-1/2 -translate-x-1/2
+  ${
+    isScrolled
+      ? "top-4 w-[90%] md:w-[600px] rounded-full bg-black/90 backdrop-blur-md border border-white/10 shadow-2xl py-3 px-6"
+      : "top-0 w-full bg-transparent py-6 px-4 md:px-12 rounded-none"
+  }`}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">

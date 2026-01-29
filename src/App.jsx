@@ -6,6 +6,7 @@ import HomeMenu from "./sections/HomeMenu";
 import Featured from "./sections/Featured"; // <--- NEW
 import Footer from "./sections/Footer"; // <--- NEW
 import MenuPage from "./pages/MenuPage";
+import Gallery from "./pages/Gallery";
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
@@ -52,6 +53,15 @@ function App() {
               <>
                 <MenuPage />
                 <Footer /> {/* Footer on menu page too */}
+              </>
+            }
+          />
+          <Route
+            path="/gallery"
+            element={
+              <>
+                <Gallery />
+                <Footer />
               </>
             }
           />

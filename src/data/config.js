@@ -74,7 +74,7 @@ export const MENU_CATEGORIES = [
                 desc: "Rich espresso softened with hot water.",
                 ingredients: "Double Shot Espresso, Hot Water",
                 tags: ["Low Calorie", "Smooth"],
-                image: "https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=1887&auto=format&fit=crop",
+                image: "https://images.pexels.com/photos/5253025/pexels-photo-5253025.jpeg",
                 available: true
             },
             {
@@ -84,7 +84,7 @@ export const MENU_CATEGORIES = [
                 desc: "Smooth, milky, and mild.",
                 ingredients: "Espresso, Lots of Steamed Milk, Light Foam",
                 tags: ["Mild", "Creamy"],
-                image: "https://images.unsplash.com/photo-1541167760496-162955ed8a9f?q=80&w=1933&auto=format&fit=crop",
+                image: "https://images.pexels.com/photos/302900/pexels-photo-302900.jpeg",
                 available: true
             }
         ]
@@ -92,7 +92,7 @@ export const MENU_CATEGORIES = [
     {
         id: "cold-coffee",
         title: "COLD COFFEE",
-        image: "https://images.unsplash.com/photo-1461023058943-48dbf13994c5?q=80&w=1974&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/32536549/pexels-photo-32536549.jpeg",
         items: [
             {
                 id: 201,
@@ -111,7 +111,7 @@ export const MENU_CATEGORIES = [
                 desc: "Infused with rich chocolate syrup.",
                 ingredients: "Coffee, Milk, Hershey's Chocolate Syrup, Ice",
                 tags: ["Chocolatey", "Kids Choice"],
-                image: "https://images.unsplash.com/photo-1541167760496-162955ed8a9f?q=80&w=1933&auto=format&fit=crop",
+                image: "https://images.pexels.com/photos/12261098/pexels-photo-12261098.jpeg",
                 available: true
             },
             {
@@ -121,7 +121,7 @@ export const MENU_CATEGORIES = [
                 desc: "Crunchy Oreo bits blended with vanilla.",
                 ingredients: "4 Oreo Biscuits, Vanilla Ice Cream, Chilled Milk",
                 tags: ["Crunchy", "Thick"],
-                image: "https://images.unsplash.com/photo-1572490122447-e139c1f09e91?q=80&w=1888&auto=format&fit=crop",
+                image: "https://images.pexels.com/photos/28525199/pexels-photo-28525199.jpeg",
                 available: true
             },
             {
@@ -131,7 +131,7 @@ export const MENU_CATEGORIES = [
                 desc: "Thick fudge brownie blended to perfection.",
                 ingredients: "Eggless Chocolate Brownie, Milk, Chocolate Sauce",
                 tags: ["Heavy", "Dessert"],
-                image: "https://images.unsplash.com/photo-1543660275-680072b051f4?q=80&w=1887&auto=format&fit=crop",
+                image: "https://images.pexels.com/photos/6680481/pexels-photo-6680481.jpeg",
                 available: true
             }
         ]
@@ -205,9 +205,44 @@ export const MENU_CATEGORIES = [
                 desc: "Fresh seasonal mango blast.",
                 ingredients: "Fresh Alphonso Mango Pulp, Chilled Milk, Honey",
                 tags: ["Fresh", "Seasonal"],
-                image: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?q=80&w=1773&auto=format&fit=crop",
+                image: "https://images.pexels.com/photos/5817624/pexels-photo-5817624.jpeg",
                 available: true
             }
         ]
+    }
+];
+
+// src/data/config.js (Append to your existing file)
+
+export const GALLERY_IMAGES = [
+    {
+        id: 1,
+        url: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2574",
+        date: "Jan 15, 2026"
+    },
+    {
+        id: 2,
+        url: "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2070",
+        date: "Jan 18, 2026"
+    },
+    {
+        id: 3,
+        url: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=1887",
+        date: "Jan 20, 2026"
+    },
+    {
+        id: 4,
+        url: "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=1816",
+        date: "Jan 22, 2026"
+    },
+    {
+        id: 5,
+        url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070",
+        date: "Jan 25, 2026"
+    },
+    {
+        id: 6,
+        url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=1000",
+        date: "Jan 28, 2026"
     }
 ];
