@@ -1,35 +1,55 @@
 // src/data/config.js
 
+// --- QUICK EDIT PRICE LIST ---
+export const PRICES = {
+    // Hot Coffee
+    cappuccino: "₹50",
+    mocaccino: "₹70",
+    espresso: "₹40",
+    americano: "₹50",
+    latte: "₹60",
+    
+    // Cold Coffee & Shakes
+    classicCold: "₹40",
+    chocolateCold: "₹40",
+    oreoShake: "₹50",
+    brownieShake: "₹60",
+    
+    // Mocktails
+    margarita: "₹60",
+    pinacolada: "₹60",
+    shirleyTemple: "₹60",
+    blackIce: "₹80",
+    whiteLady: "₹80",
+    
+    // Seasonal
+    mangoMood: "₹30"
+};
+
 export const SITE_CONFIG = {
     name: "Rainbow Cafe",
     tagline: "SIP THE HAPPINESS",
-    // The exact quote from his Google Maps cover photo for the loader/hero
     quote: {
         line1: "Friends bring happiness...",
         line2: "Best friends bring coffee."
     },
     contact: {
         phone: "075840 62468",
-        email: "rainbowcafe110821@gmail.com", // Found on his menu card
+        email: "rainbowcafe110821@gmail.com",
         address: "Food Zone, College Rd, Midnapore, West Bengal 721101",
-        mapLink: "https://maps.app.goo.gl/YourMapLinkHere" // You can add his real map link later
+        mapLink: "https://maps.app.goo.gl/9Z6v5mY9z6v5mY9z6" 
     },
-    // Theme colors for easy swapping later
     theme: {
-        primary: "#fca311", // The 'Gold' accent color
-        bg: "#0f0f0f",      // Dark mode background
+        primary: "#fca311",
+        bg: "#0f0f0f",
         text: "#ffffff"
     },
     hero: {
-        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2574&auto=format&fit=crop", // High-quality dark coffee BG
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2574&auto=format&fit=crop",
         title: "MIDNAPORE'S FINEST",
         subtitle: "Freshly brewed 100% Arabica coffee."
     }
 };
-
-// src/data/config.js
-
-// src/data/config.js
 
 export const MENU_CATEGORIES = [
     {
@@ -40,7 +60,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 101,
                 name: "Cappuccino",
-                price: "₹50",
+                price: PRICES.cappuccino,
                 desc: "Classic frothy delight with cocoa dust.",
                 ingredients: "Double Shot Espresso, Steamed Milk, Thick Foam, Cocoa Powder",
                 tags: ["Best Seller", "100% Arabica"],
@@ -50,7 +70,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 102,
                 name: "Mocaccino",
-                price: "₹70",
+                price: PRICES.mocaccino,
                 desc: "A perfect blend of coffee and chocolate.",
                 ingredients: "Espresso, Dark Chocolate Sauce, Steamed Milk, Whipped Cream",
                 tags: ["Chocolatey", "Sweet"],
@@ -60,7 +80,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 103,
                 name: "Espresso Single Shot",
-                price: "₹40",
+                price: PRICES.espresso,
                 desc: "Pure, intense caffeine kick.",
                 ingredients: "Fine Ground Arabica Coffee, Hot Water (30ml)",
                 tags: ["High Caffeine", "Strong"],
@@ -70,7 +90,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 104,
                 name: "Americano",
-                price: "₹50",
+                price: PRICES.americano,
                 desc: "Rich espresso softened with hot water.",
                 ingredients: "Double Shot Espresso, Hot Water",
                 tags: ["Low Calorie", "Smooth"],
@@ -80,7 +100,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 105,
                 name: "Cafe Latte",
-                price: "₹60",
+                price: PRICES.latte,
                 desc: "Smooth, milky, and mild.",
                 ingredients: "Espresso, Lots of Steamed Milk, Light Foam",
                 tags: ["Mild", "Creamy"],
@@ -97,7 +117,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 201,
                 name: "Classic Cold Coffee",
-                price: "₹40",
+                price: PRICES.classicCold,
                 desc: "The chilled classic everyone loves.",
                 ingredients: "Coffee Decoction, Chilled Milk, Sugar, Ice Cubes",
                 tags: ["Classic", "Refreshing"],
@@ -107,7 +127,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 202,
                 name: "Chocolate Cold Coffee",
-                price: "₹40",
+                price: PRICES.chocolateCold,
                 desc: "Infused with rich chocolate syrup.",
                 ingredients: "Coffee, Milk, Hershey's Chocolate Syrup, Ice",
                 tags: ["Chocolatey", "Kids Choice"],
@@ -117,7 +137,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 203,
                 name: "Oreo Shake",
-                price: "₹50",
+                price: PRICES.oreoShake,
                 desc: "Crunchy Oreo bits blended with vanilla.",
                 ingredients: "4 Oreo Biscuits, Vanilla Ice Cream, Chilled Milk",
                 tags: ["Crunchy", "Thick"],
@@ -127,7 +147,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 204,
                 name: "Brownie Shake",
-                price: "₹60",
+                price: PRICES.brownieShake,
                 desc: "Thick fudge brownie blended to perfection.",
                 ingredients: "Eggless Chocolate Brownie, Milk, Chocolate Sauce",
                 tags: ["Heavy", "Dessert"],
@@ -144,7 +164,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 301,
                 name: "Margarita",
-                price: "₹60",
+                price: PRICES.margarita,
                 desc: "Zesty lime and mint refreshment.",
                 ingredients: "Fresh Lime Juice, Mint Leaves, Simple Syrup, Club Soda",
                 tags: ["Non-Alcoholic", "Zesty"],
@@ -154,7 +174,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 302,
                 name: "Pinacolada",
-                price: "₹60",
+                price: PRICES.pinacolada,
                 desc: "Tropical coconut and pineapple vibes.",
                 ingredients: "Pineapple Juice, Coconut Cream, Crushed Ice",
                 tags: ["Tropical", "Sweet"],
@@ -164,7 +184,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 303,
                 name: "Shirley Temple",
-                price: "₹60",
+                price: PRICES.shirleyTemple,
                 desc: "Sweet grenadine and lemon fizz.",
                 ingredients: "Ginger Ale, Grenadine Syrup, Maraschino Cherry",
                 tags: ["Fizzy", "Sweet"],
@@ -174,7 +194,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 304,
                 name: "Black Ice",
-                price: "₹80",
+                price: PRICES.blackIce,
                 desc: "Deep berry flavor with a cool finish.",
                 ingredients: "Blackberry Extract, Mint, Lemon, Soda",
                 tags: ["Cool", "Exotic"],
@@ -184,7 +204,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 305,
                 name: "White Lady",
-                price: "₹80",
+                price: PRICES.whiteLady,
                 desc: "Creamy vanilla twist.",
                 ingredients: "Cream, Vanilla Syrup, Lemon Juice, Egg White (Alternative)",
                 tags: ["Sophisticated", "Smooth"],
@@ -201,7 +221,7 @@ export const MENU_CATEGORIES = [
             {
                 id: 401,
                 name: "Mango Mood",
-                price: "₹30",
+                price: PRICES.mangoMood,
                 desc: "Fresh seasonal mango blast.",
                 ingredients: "Fresh Alphonso Mango Pulp, Chilled Milk, Honey",
                 tags: ["Fresh", "Seasonal"],
@@ -212,37 +232,17 @@ export const MENU_CATEGORIES = [
     }
 ];
 
-// src/data/config.js (Append to your existing file)
-
 export const GALLERY_IMAGES = [
-    {
-        id: 1,
-        url: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2574",
-        date: "Jan 15, 2026"
-    },
-    {
-        id: 2,
-        url: "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2070",
-        date: "Jan 18, 2026"
-    },
-    {
-        id: 3,
-        url: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=1887",
-        date: "Jan 20, 2026"
-    },
-    {
-        id: 4,
-        url: "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=1816",
-        date: "Jan 22, 2026"
-    },
-    {
-        id: 5,
-        url: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070",
-        date: "Jan 25, 2026"
-    },
-    {
-        id: 6,
-        url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=1000",
-        date: "Jan 28, 2026"
-    }
+    { id: 1, url: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg", date: "Jan 15, 2026" },
+    { id: 2, url: "https://images.pexels.com/photos/1230671/pexels-photo-1230671.jpeg", date: "Jan 18, 2026" },
+    { id: 3, url: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg", date: "Jan 20, 2026" },
+    { id: 4, url: "https://images.pexels.com/photos/302900/pexels-photo-302900.jpeg", date: "Jan 22, 2026" },
+    { id: 5, url: "https://images.pexels.com/photos/1189257/pexels-photo-1189257.jpeg", date: "Jan 24, 2026" },
+    { id: 6, url: "https://images.pexels.com/photos/2615323/pexels-photo-2615323.jpeg", date: "Jan 26, 2026" },
+    { id: 7, url: "https://images.pexels.com/photos/1193334/pexels-photo-1193334.jpeg", date: "Jan 28, 2026" },
+    { id: 8, url: "https://images.pexels.com/photos/3313010/pexels-photo-3313010.jpeg", date: "Jan 30, 2026" },
+    { id: 9, url: "https://images.pexels.com/photos/616833/pexels-photo-616833.jpeg", date: "Feb 01, 2026" },
+    { id: 10, url: "https://images.pexels.com/photos/1684149/pexels-photo-1684149.jpeg", date: "Feb 03, 2026" },
+    { id: 11, url: "https://images.pexels.com/photos/1230670/pexels-photo-1230670.jpeg", date: "Feb 05, 2026" },
+    { id: 12, url: "https://images.pexels.com/photos/4349733/pexels-photo-4349733.jpeg", date: "Feb 07, 2026" }
 ];
